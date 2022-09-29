@@ -53,13 +53,9 @@ public class FichaServiceImpl implements FichaService{
     }
 
     @Override
-    public FichaPersonal delete(int id) {
-        FichaPersonal byId = repository.findById(id).orElse(null);
-        if(byId==null){
-            return null;
-        }
-        repository.delete(byId);
-        return byId;
+    public void delete(FichaPersonal ficha) {
+        repository.delete(ficha);
+
     }
 
     @Override
@@ -74,7 +70,7 @@ public class FichaServiceImpl implements FichaService{
 
     @Override
     public List<FichaPersonal> getByCountry(Paises paises) {
-        return null;
+        return repository.findBypaisResidencia(paises);
     }
 
 

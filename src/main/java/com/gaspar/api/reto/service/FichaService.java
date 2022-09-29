@@ -9,7 +9,7 @@ import java.util.List;
 public interface FichaService {
     FichaPersonal save(FichaRequest ficha);
     FichaPersonal update(Integer id, FichaRequest ficha);
-    FichaPersonal delete(int id);
+    void delete(FichaPersonal ficha);
     FichaPersonal getFicha(int id);
     List<FichaPersonal> getAll();
     List<FichaPersonal> getByCountry(Paises paises);

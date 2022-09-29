@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class TestMetodosFichaService {
+public class Testpatito {
     @Test
     void validarPais(){
 
@@ -27,5 +27,6 @@ public class TestMetodosFichaService {
         assertThat(paises).isEqualTo(Paises.Ninguno);
 
     }
+
 
 }

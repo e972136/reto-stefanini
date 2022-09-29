@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 @Data
-@AllArgsConstructor
+@AllArgsConstructor(staticName = "of")
 @NoArgsConstructor
 public class FichaRequest {
 
