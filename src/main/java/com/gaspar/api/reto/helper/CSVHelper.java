@@ -2,6 +2,7 @@ package com.gaspar.api.reto.helper;
 
 
 import com.gaspar.api.reto.entity.Empleado;
+import com.gaspar.api.reto.entity.Reparacion;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -11,12 +12,15 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CSVHelper {
     public static String TYPE="text/csv";
-    static String[] HEADERs = { "Id", "nombre", "direccion", "trabajando" };
+    static String[] HEADERs = { "IDReparacion", "Descripcion", "Cantidad", "ValorUnitario","CreadoEn" };
 
     public static boolean hasCSVFormat(MultipartFile file) {
 
@@ -27,24 +31,30 @@ public class CSVHelper {
         return true;
     }
 
-    public static List<Empleado> csvToTutorials(InputStream is) {
+    public static List<Reparacion> csvToTutorials(InputStream is) {
         try (BufferedReader fileReader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
              CSVParser csvParser = new CSVParser(fileReader,
                      CSVFormat.DEFAULT.withFirstRecordAsHeader().withIgnoreHeaderCase().withTrim());) {
 
-            List<Empleado> tutorials = new ArrayList<Empleado>();
+            List<Reparacion> tutorials = new ArrayList<Reparacion>();
 
             Iterable<CSVRecord> csvRecords = csvParser.getRecords();
 
-            for (CSVRecord csvRecord : csvRecords) {
-                Empleado tutorial = new Empleado(
-                        Integer.parseInt(csvRecord.get("Id")),
-                        csvRecord.get("nombre"),
-                        csvRecord.get("direccion"),
-                        Boolean.parseBoolean(csvRecord.get("trabajando"))
-                );
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
+            for (CSVRecord csvRecord : csvRecords) {
+                try{
+                Reparacion tutorial = Reparacion.builder()
+                        .IdReparacion(Integer.parseInt(csvRecord.get("IDReparacion")))
+                        .descripcion(csvRecord.get("Descripcion"))
+                        .cantidad(Integer.parseInt(csvRecord.get("Cantidad")))
+                        .valorUnitario(new BigDecimal(csvRecord.get("ValorUnitario")))
+                        .creadoEn(LocalDate.parse(csvRecord.get("CreadoEn"),formatter))
+                        .build();
                 tutorials.add(tutorial);
+                }catch (Exception e){
+                    System.out.println(e+""+csvRecord);
+                }
             }
 
             return tutorials;

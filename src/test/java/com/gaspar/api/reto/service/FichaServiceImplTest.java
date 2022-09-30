@@ -147,7 +147,7 @@ class FichaServiceImplTest {
                 ,LocalDate.now()
         );
         service.save(fichaPersonal);
-        List<FichaPersonal> byCountry = service.getByCountry(Paises.HN);
+        List<FichaPersonal> byCountry = service.getByCountry("honduras");
         assertEquals(1,byCountry.size());
     }
 

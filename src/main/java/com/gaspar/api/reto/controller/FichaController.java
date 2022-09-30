@@ -53,7 +53,7 @@ public class FichaController {
     ResponseEntity<List<FichaPersonal>> traerDatos(@RequestParam(value = "pais",required = false)String pais){
         List<FichaPersonal> fichaPersonals;
         if(pais!=null){
-            fichaPersonals = service.getByCountry(service.obtenerPais(pais));
+            fichaPersonals = service.getByCountry(pais);
         }else{
             fichaPersonals = service.getAll();
         }

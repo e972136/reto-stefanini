@@ -69,8 +69,8 @@ public class FichaServiceImpl implements FichaService{
     }
 
     @Override
-    public List<FichaPersonal> getByCountry(Paises paises) {
-        return repository.findBypaisResidencia(paises);
+    public List<FichaPersonal> getByCountry(String paises) {
+        return repository.findBypaisResidencia(obtenerPais(paises));
     }
 
 

@@ -12,6 +12,6 @@ public interface FichaService {
     void delete(FichaPersonal ficha);
     FichaPersonal getFicha(int id);
     List<FichaPersonal> getAll();
-    List<FichaPersonal> getByCountry(Paises paises);
+    List<FichaPersonal> getByCountry(String paises);
     Paises obtenerPais(String paisResidencia);
 }
