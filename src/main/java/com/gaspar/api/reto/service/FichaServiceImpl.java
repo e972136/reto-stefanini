@@ -76,17 +76,13 @@ public class FichaServiceImpl implements FichaService{
 
     public Paises obtenerPais(String paisResidencia){
         Paises[] values = Paises.values();
-        try {
-            Paises retornar = Paises.Ninguno;
-            for(Paises p:values){
-                if(p.getNombre().equalsIgnoreCase(paisResidencia)){
-                    retornar = p;
-                    break;
-                }
+        Paises retornar = Paises.Ninguno;
+        for(Paises p:values){
+            if(p.getNombre().equalsIgnoreCase(paisResidencia)){
+                retornar = p;
+                break;
             }
-            return retornar;
-        }catch (Exception e){
-            return Paises.Ninguno;
         }
+        return retornar;
     }
 }

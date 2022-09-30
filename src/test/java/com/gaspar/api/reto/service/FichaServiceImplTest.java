@@ -12,6 +12,7 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -50,13 +51,56 @@ class FichaServiceImplTest {
         assertNotEquals(null,save);
     }
 
-//    @Test
-//    void update() {
-//    }
+    @Test
+    void update() {
+        FichaRequest fichaPersonal = FichaRequest.of(
+                "a"
+                ,"a"
+                ,"a"
+                ,"a"
+                , "el salvador"
+                ,"a"
+                ,LocalDate.now()
+        );
+        FichaPersonal save = service.save(fichaPersonal);
+
+        save.setNombre("Patito");
+
+        FichaRequest update = FichaRequest.builder()
+                .nombre(save.getNombre())
+                .apellidos(save.getApellidos())
+                .ciudadResidencia(save.getCiudadResidencia())
+                .paisResidencia(save.getPaisResidencia().getNombre())
+                .sitioTrabajo(save.getSitioTrabajo())
+                .telefono(save.getTelefono())
+                .fechaNacimiento(save.getFechaNacimiento())
+                .build();
+
+
+        FichaPersonal actualizado = service.update(save.getId(),update);
+
+        assertEquals(save.getNombre(),actualizado.getNombre());
+
+    }
 //
-//    @Test
-//    void delete() {
-//    }
+    @Test
+    void delete() {
+        FichaRequest fichaPersonal = FichaRequest.of(
+                "b"
+                ,"b"
+                ,"b"
+                ,"b"
+                , "honduras"
+                ,"b"
+                ,LocalDate.now()
+        );
+        FichaPersonal save = service.save(fichaPersonal);
+        assertEquals(1,service.getAll().size());
+
+        service.delete(save);
+        assertEquals(0,service.getAll().size());
+
+    }
 //
     @Test
     void getFicha() {
@@ -88,13 +132,25 @@ class FichaServiceImplTest {
         service.save(fichaPersonal);
         service.save(fichaPersonal);
         service.save(fichaPersonal);
-        System.out.println(service.getAll().size());
+        assertEquals(3,service.getAll().size());
     }
-//
-//    @Test
-//    void getByCountry() {
-//    }
-//
+
+    @Test
+    void getByCountry() {
+        FichaRequest fichaPersonal = FichaRequest.of(
+                "b"
+                ,"b"
+                ,"b"
+                ,"b"
+                , "honduras"
+                ,"b"
+                ,LocalDate.now()
+        );
+        service.save(fichaPersonal);
+        List<FichaPersonal> byCountry = service.getByCountry(Paises.HN);
+        assertEquals(1,byCountry.size());
+    }
+
     @Test
     void obtenerPais() {
         Paises paises = service.obtenerPais("El Salvador");

@@ -3,6 +3,7 @@ package com.gaspar.api.reto.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.gaspar.api.reto.entity.Paises;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -17,6 +18,7 @@ import java.time.LocalDate;
 @Data
 @AllArgsConstructor(staticName = "of")
 @NoArgsConstructor
+@Builder
 public class FichaRequest {
 
     @NotEmpty
