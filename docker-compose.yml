@@ -24,13 +24,13 @@ services:
     depends_on:
       - db_stefanini
 
-  stefanini:
-    image: 'stefanini:latest'
-    container_name: stefanini
-    build:
-     context: .
-    depends_on:
-      - db_stefanini
-      - pgadmin_stefanini
-    ports:
-      - 1001:1001
+#  stefanini:
+#    image: 'stefanini:latest'
+#    container_name: stefanini
+#    build:
+#     context: .
+#    depends_on:
+#      - db_stefanini
+#      - pgadmin_stefanini
+#    ports:
+#      - 1001:1001

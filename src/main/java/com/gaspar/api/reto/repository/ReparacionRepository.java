@@ -1,7 +1,6 @@
 package com.gaspar.api.reto.repository;
 
 
-import com.gaspar.api.reto.entity.Empleado;
 import com.gaspar.api.reto.entity.Reparacion;
 import org.springframework.data.jpa.repository.JpaRepository;
 
