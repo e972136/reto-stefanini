@@ -50,10 +50,10 @@ public class FichaController {
     }
 
     @GetMapping("/todos")
-    ResponseEntity<List<FichaPersonal>> traerDatos(@RequestParam(value = "pais",required = false)Paises pais){
+    ResponseEntity<List<FichaPersonal>> traerDatos(@RequestParam(value = "pais",required = false)String pais){
         List<FichaPersonal> fichaPersonals;
         if(pais!=null){
-            fichaPersonals = service.getByCountry(pais);
+            fichaPersonals = service.getByCountry(service.obtenerPais(pais));
         }else{
             fichaPersonals = service.getAll();
         }

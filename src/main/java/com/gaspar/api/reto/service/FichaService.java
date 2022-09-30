@@ -13,5 +13,5 @@ public interface FichaService {
     FichaPersonal getFicha(int id);
     List<FichaPersonal> getAll();
     List<FichaPersonal> getByCountry(Paises paises);
-
+    Paises obtenerPais(String paisResidencia);
 }
