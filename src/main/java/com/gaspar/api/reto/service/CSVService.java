@@ -4,7 +4,10 @@ package com.gaspar.api.reto.service;
 import com.gaspar.api.reto.entity.Reparacion;
 import com.gaspar.api.reto.helper.CSVHelper;
 import com.gaspar.api.reto.repository.ReparacionRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -42,7 +45,7 @@ public class CSVService {
         }
     }
 
-    public List<Reparacion> getAllTutorials() {
-        return repository.findAll();
+    public Page<Reparacion> getAllItem(int size, int page) {
+        return repository.findAll(PageRequest.of(page,size));
     }
 }

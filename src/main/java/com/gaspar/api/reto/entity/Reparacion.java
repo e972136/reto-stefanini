@@ -1,6 +1,7 @@
 package com.gaspar.api.reto.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,6 +20,7 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@JsonPropertyOrder({"IdReparacion","descripcion","cantidad","valorUnitario","creadoEn"})
 public class Reparacion {
     @Id
     Integer IdReparacion;

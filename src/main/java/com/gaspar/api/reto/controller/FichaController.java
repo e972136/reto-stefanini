@@ -4,6 +4,9 @@ import com.gaspar.api.reto.dto.FichaRequest;
 import com.gaspar.api.reto.entity.FichaPersonal;
 import com.gaspar.api.reto.entity.Paises;
 import com.gaspar.api.reto.service.FichaService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -25,6 +28,9 @@ public class FichaController {
     }
 
     @PostMapping("/guardar")
+    @Operation(summary = "Guardar nueva ficha",responses = {
+            @ApiResponse(responseCode = "202",description = "Creado")
+    })
     ResponseEntity<FichaPersonal> guardarFicha(@Valid @RequestBody FichaRequest fichaRequest,
                                                BindingResult result){
         if(result.hasErrors()){
@@ -35,6 +41,10 @@ public class FichaController {
     }
 
     @PutMapping("/{id}")
+    @Operation(summary = "Actualizar ficha",responses = {
+            @ApiResponse(responseCode = "404",description = "Ficha no encontrada"),
+            @ApiResponse(responseCode = "200",description = "Ficha Actualizada")
+    })
     ResponseEntity<FichaPersonal> actualizarFicha(@PathVariable Integer id,
                                                   @Valid @RequestBody FichaRequest fichaRequest,
                                                   BindingResult result)
@@ -50,6 +60,10 @@ public class FichaController {
     }
 
     @GetMapping("/todos")
+    @Operation(summary = "Obtener listado de fichas ingresada, puede filtrar por pais",responses = {
+            @ApiResponse(responseCode = "404",description = "No hay fichas ingresadas"),
+            @ApiResponse(responseCode = "200",description = "Fichas obtenidas")
+    })
     ResponseEntity<List<FichaPersonal>> traerDatos(@RequestParam(value = "pais",required = false)String pais){
         List<FichaPersonal> fichaPersonals;
         if(pais!=null){
@@ -64,6 +78,10 @@ public class FichaController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Obtener ficha mediante Id",responses = {
+            @ApiResponse(responseCode = "404",description = "Ficha no encontrada"),
+            @ApiResponse(responseCode = "200",description = "Ficha obtenida")
+    })
     ResponseEntity<FichaPersonal> obtenerFicha(@PathVariable Integer id){
         FichaPersonal ficha = service.getFicha(id);
         if(ficha==null){
@@ -73,6 +91,10 @@ public class FichaController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Eliminar ficha usando Id",responses = {
+            @ApiResponse(responseCode = "404",description = "Ficha no encontrada"),
+            @ApiResponse(responseCode = "200",description = "Ficha Eliminada")
+    })
     ResponseEntity<FichaPersonal> eliminarFicha(@PathVariable Integer id){
         FichaPersonal ficha = service.getFicha(id);
         if(ficha==null){
